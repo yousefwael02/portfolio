@@ -12,7 +12,7 @@ The site will be public-facing, fast, responsive, accessible, and CMS-driven so 
 
 Use the stack outlined in the project brief as the default implementation baseline:
 
-- Frontend: Next.js + TypeScript
+- Frontend: React.js + TypeScript
 - Styling: Tailwind CSS
 - CMS: Sanity
 - Media delivery: Sanity image pipeline / Cloudinary
@@ -164,7 +164,7 @@ Build the application shell and page infrastructure.
 
 ### Tasks
 
-- Initialize the Next.js app and project structure.
+- Initialize the React.js app and project structure.
 - Configure TypeScript, Tailwind, ESLint, and formatting rules.
 - Build the app shell: header, footer, navigation, mobile menu, and layout components.
 - Configure metadata and routing.
@@ -174,7 +174,7 @@ Build the application shell and page infrastructure.
 
 ### Deliverables
 
-- Working Next.js app scaffold
+- Working React.js app scaffold
 - Shared shell and navigation
 - Reusable primitives
 - Base styling system
@@ -367,7 +367,7 @@ A realistic timeline for a solo build is 5 to 8 weeks depending on content readi
 - [ ] Social links and contact details confirmed
 
 ### Technical
-- [ ] Next.js app initialized
+- [ ] React.js app initialized
 - [ ] Tailwind and TypeScript configured
 - [ ] Sanity connected and content models created
 - [ ] Project listing and detail routing working

@@ -34,7 +34,7 @@ Recommended stack:
 
 | Area | Recommended technology |
 |---|---|
-| Frontend | Next.js with TypeScript |
+| Frontend | React.js with TypeScript |
 | Styling | Tailwind CSS |
 | Content management | Sanity CMS |
 | Media delivery | Sanity image CDN or Cloudinary |
