@@ -1,0 +1,30 @@
+import {defineField, defineType} from 'sanity'
+
+export const profile = defineType({
+  name: 'profile',
+  title: 'Profile',
+  type: 'document',
+  fields: [
+    defineField({name: 'fullName', title: 'Full name', type: 'string', validation: (Rule) => Rule.required()}),
+    defineField({name: 'professionalTitle', title: 'Professional title', type: 'string', validation: (Rule) => Rule.required()}),
+    defineField({name: 'valueProposition', title: 'Value proposition', type: 'text', rows: 3, validation: (Rule) => Rule.required().max(240)}),
+    defineField({name: 'positioningStatement', title: 'Positioning statement', type: 'text', rows: 3, validation: (Rule) => Rule.required().max(240)}),
+    defineField({name: 'bio', title: 'Professional bio', type: 'array', of: [{type: 'block'}], validation: (Rule) => Rule.required()}),
+    defineField({name: 'coreStrengths', title: 'Core strengths', type: 'array', of: [{type: 'string'}], validation: (Rule) => Rule.min(4).max(8)}),
+    defineField({name: 'skillHighlights', title: 'Skill highlights', type: 'array', of: [{type: 'string'}], validation: (Rule) => Rule.min(5).max(10)}),
+    defineField({name: 'targetOpportunities', title: 'Target opportunities', type: 'array', of: [{type: 'string'}]}),
+    defineField({name: 'location', title: 'Location', type: 'string'}),
+    defineField({name: 'timeZone', title: 'Time zone', type: 'string'}),
+    defineField({name: 'isAvailable', title: 'Available for work', type: 'boolean', initialValue: true}),
+    defineField({name: 'availabilityMessage', title: 'Availability message', type: 'string', validation: (Rule) => Rule.max(160)}),
+    defineField({name: 'email', title: 'Public email', type: 'email', validation: (Rule) => Rule.required()}),
+    defineField({name: 'profileImage', title: 'Profile image', type: 'image', options: {hotspot: true}}),
+    defineField({name: 'resume', title: 'Resume', type: 'file', options: {accept: '.pdf'}, validation: (Rule) => Rule.required()}),
+    defineField({name: 'resumeFileName', title: 'Resume file name', type: 'string'}),
+    defineField({name: 'resumeUrl', title: 'Resume URL', type: 'url'}),
+    defineField({name: 'primaryCtaLabel', title: 'Primary CTA label', type: 'string', validation: (Rule) => Rule.required()}),
+    defineField({name: 'primaryCtaUrl', title: 'Primary CTA URL', type: 'string', initialValue: '/projects', validation: (Rule) => Rule.required()}),
+    defineField({name: 'secondaryCtaLabel', title: 'Secondary CTA label', type: 'string', validation: (Rule) => Rule.required()}),
+    defineField({name: 'secondaryCtaUrl', title: 'Secondary CTA URL', type: 'string', initialValue: '/contact', validation: (Rule) => Rule.required()}),
+  ],
+})
