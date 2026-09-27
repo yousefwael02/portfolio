@@ -23,7 +23,7 @@ export const project = defineType({
     defineField({name: 'isOngoing', title: 'Ongoing project', type: 'boolean', initialValue: false}),
     defineField({name: 'liveUrl', title: 'Live URL', type: 'url'}),
     defineField({name: 'repositoryUrl', title: 'Repository URL', type: 'url'}),
-    defineField({name: 'coverImage', title: 'Cover image', type: 'image', options: {hotspot: true}, validation: (Rule) => Rule.required()}),
+    defineField({name: 'coverImage', title: 'Cover image', type: 'image', options: {hotspot: true}}),
     defineField({name: 'galleryImages', title: 'Gallery images', type: 'array', of: [defineArrayMember({type: 'image', options: {hotspot: true}})]}),
     defineField({name: 'outcome', title: 'Outcome / results', type: 'text', rows: 5, validation: (Rule) => Rule.required()}),
     defineField({name: 'isFeatured', title: 'Featured project', type: 'boolean', initialValue: false}),

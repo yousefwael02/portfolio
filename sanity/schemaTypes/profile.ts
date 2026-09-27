@@ -19,7 +19,7 @@ export const profile = defineType({
     defineField({name: 'availabilityMessage', title: 'Availability message', type: 'string', validation: (Rule) => Rule.max(160)}),
     defineField({name: 'email', title: 'Public email', type: 'email', validation: (Rule) => Rule.required()}),
     defineField({name: 'profileImage', title: 'Profile image', type: 'image', options: {hotspot: true}}),
-    defineField({name: 'resume', title: 'Resume', type: 'file', options: {accept: '.pdf'}, validation: (Rule) => Rule.required()}),
+    defineField({name: 'resume', title: 'Resume', type: 'file', options: {accept: '.pdf'}}),
     defineField({name: 'resumeFileName', title: 'Resume file name', type: 'string'}),
     defineField({name: 'resumeUrl', title: 'Resume URL', type: 'url'}),
     defineField({name: 'primaryCtaLabel', title: 'Primary CTA label', type: 'string', validation: (Rule) => Rule.required()}),
