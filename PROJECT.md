@@ -676,61 +676,69 @@ The initial release is complete when:
 
 ### Phase 1: Discovery and Content Planning
 
-- Define professional positioning and target opportunities.
-- Select projects for the initial launch.
-- Collect project descriptions, screenshots, links, and outcomes.
-- Prepare biography, experience, skills, services, social links, and resume.
-- Confirm the technical stack and hosting services.
+- Finalize professional positioning and target opportunities.
+- Select the initial project set for launch.
+- Gather project summaries, outcome metrics, screenshots, and links.
+- Prepare profile, experience, education, services, skills, social links, and resume content.
+- Decide the primary audience and messaging hierarchy.
+- Confirm branding direction, tone, and preferred visual style.
+- Validate the stack and deployment services.
 
 ### Phase 2: Information Architecture and Design
 
-- Finalize page structure and navigation.
-- Define CMS schemas and relationships.
-- Create wireframes for primary pages.
-- Establish the visual design system.
-- Design mobile and desktop layouts.
+- Map the site structure: home, about, projects, project detail, services, contact, and resume.
+- Define desktop and mobile navigation, CTA hierarchy, and conversion paths.
+- Create wireframes for primary screens.
+- Establish colors, typography, spacing, component patterns, and responsive layouts.
+- Define loading, empty, error, and not-found states.
 
-### Phase 3: CMS Implementation
+### Phase 3: CMS Implementation and Schema Setup
 
-- Configure authentication and administrator access.
-- Create content schemas and validation rules.
-- Configure media management.
-- Implement drafts, previews, publication states, and ordering.
-- Add initial content.
+- Set up Sanity Studio and secure administrator access.
+- Create schemas for profile, projects, skills, technologies, categories, experience, education, services, social links, and site settings.
+- Add validation for required fields, URLs, slugs, and publication states.
+- Configure image and document uploads, ordering, SEO fields, drafts, and archived states.
+- Add the initial content package.
 
-### Phase 4: Frontend Implementation
+### Phase 4: Frontend Foundation and Shared Layout
 
-- Build the shared application layout and navigation.
-- Build reusable components.
-- Connect pages to CMS data.
-- Implement project listing, filtering, and case studies.
-- Implement profile, skills, experience, education, and services.
-- Implement SEO and structured data.
+- Initialize the React application and project structure.
+- Configure TypeScript, Tailwind CSS, ESLint, and formatting rules.
+- Build the shared shell, header, footer, desktop navigation, and mobile menu.
+- Configure routing, metadata foundations, environment variables, and component primitives.
+- Add responsive utilities, visible focus states, and accessibility defaults.
 
-### Phase 5: Integrations
+### Phase 5: Public Pages and Content Integration
 
-- Implement contact email delivery.
-- Add spam prevention and rate limiting.
-- Configure analytics.
-- Configure resume delivery.
-- Configure CMS webhooks or revalidation.
+- Build CMS-driven home, about, projects, project detail, services, experience, education, and contact pages.
+- Implement project cards, filtering, stable project URLs, and optional-field handling.
+- Add resume links and safe external links.
+- Implement page metadata, structured data, sitemap, robots.txt, canonical URLs, and social metadata.
+- Verify published records appear publicly while draft, hidden, and archived content remains private.
 
-### Phase 6: Quality Assurance
+### Phase 6: Contact Form, Analytics, and Integrations
 
-- Test responsive behavior and supported browsers.
-- Test keyboard and screen-reader behavior.
-- Test all CMS content states.
-- Test contact-form success and failure paths.
-- Review performance and optimize media and scripts.
-- Check links, metadata, sitemap, and social previews.
+- Implement contact form validation, email delivery, success/error states, and duplicate-submit prevention.
+- Add spam protection and rate limiting.
+- Configure privacy-conscious analytics without collecting message contents.
+- Configure resume delivery and CMS webhooks or revalidation.
 
-### Phase 7: Deployment and Launch
+### Phase 7: Quality Assurance and Performance
 
-- Configure production environment variables.
-- Deploy the application.
-- Connect the custom domain and verify HTTPS.
+- Test mobile, tablet, desktop, keyboard, and supported browsers.
+- Review screen-reader behavior, focus order, heading hierarchy, labels, and color contrast.
+- Test published, draft, archived, missing, and optional CMS content states.
+- Test contact-form success, validation, service failure, and rate-limiting paths.
+- Review performance, accessibility, SEO, links, sitemap, and social previews.
+- Document remaining issues and verify fixes.
+
+### Phase 8: Deployment and Launch
+
+- Configure production environment variables and deployment settings.
+- Deploy the application to Vercel.
+- Connect a custom domain when available and verify HTTPS.
 - Verify analytics, email delivery, CMS updates, and error monitoring.
-- Publish the initial project case studies.
+- Publish at least three complete project case studies.
 - Add the portfolio URL to LinkedIn, GitHub, resumes, and freelance profiles.
 
 ## 13. Measures of Success
