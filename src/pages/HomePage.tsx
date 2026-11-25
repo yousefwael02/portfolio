@@ -1,6 +1,7 @@
-import {ArrowDownRight, ArrowUpRight, Braces, Database, ServerCog} from 'lucide-react'
+import {ArrowUpRight, Braces, Database, ServerCog} from 'lucide-react'
 import {Link} from 'react-router-dom'
 import {EmptyState, PageLoading} from '../components/ContentStates'
+import {ProfileOrbit} from '../components/ProfileOrbit'
 import {ProjectCard} from '../components/ProjectCard'
 import {SEO} from '../components/SEO'
 import {usePortfolio} from '../context/usePortfolio'
@@ -52,11 +53,7 @@ export function HomePage() {
             <Link className="text-link" to={profile?.secondaryCtaUrl || '/contact'}>{profile?.secondaryCtaLabel || 'Get in touch'} <ArrowUpRight aria-hidden="true" size={16} /></Link>
           </div>
         </div>
-        {image ? <div className="hero__portrait"><img src={image} alt={profile?.profileImage?.alt || profile?.fullName || 'Profile portrait'} /></div> : <div className="hero__aside" aria-label="Professional focus">
-          <div className="orbit orbit--outer" /><div className="orbit orbit--inner" />
-          <div className="orbit-core"><span>{profile?.fullName?.split(' ').map((part) => part[0]).slice(0, 2).join('') || 'YW'}</span><small>{profile?.location || 'CAIRO, EGYPT'}</small></div>
-          <p className="hero__aside-label">Engineering with purpose</p><ArrowDownRight className="hero__aside-arrow" aria-hidden="true" size={23} />
-        </div>}
+        {image ? <div className="hero__portrait"><img src={image} alt={profile?.profileImage?.alt || profile?.fullName || 'Profile portrait'} /></div> : <ProfileOrbit fullName={profile?.fullName} location={profile?.location} />}
         <div className="hero__index"><span>01</span><span className="hero__index-line" /><span>{profile?.timeZone || 'CAIRO, EGYPT'}</span></div>
       </section>
 

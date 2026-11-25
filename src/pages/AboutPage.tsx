@@ -1,6 +1,7 @@
 import {ArrowDownToLine, ArrowUpRight} from 'lucide-react'
 import {Link} from 'react-router-dom'
 import {PageLoading} from '../components/ContentStates'
+import {ProfileOrbit} from '../components/ProfileOrbit'
 import {SEO} from '../components/SEO'
 import {usePortfolio} from '../context/usePortfolio'
 import {trackEvent} from '../lib/analytics'
@@ -31,7 +32,7 @@ export function AboutPage() {
       <section className="about-page section-wrap">
         <header className="page-heading"><p className="eyebrow">02 / About</p><h1>Engineering perspective.<br /><span>Software focus.</span></h1></header>
         <div className="about-intro">
-          {portrait ? <img className="about-portrait" src={portrait} alt={profile?.profileImage?.alt || profile?.fullName || 'Profile portrait'} /> : <div className="about-monogram" aria-hidden="true">{profile?.fullName?.split(' ').map((part) => part[0]).slice(0, 2).join('') || 'YW'}</div>}
+          {portrait ? <img className="about-portrait" src={portrait} alt={profile?.profileImage?.alt || profile?.fullName || 'Profile portrait'} /> : <ProfileOrbit className="about-orbit" fullName={profile?.fullName} location={profile?.location} />}
           <div className="about-copy">
             {(profile?.bio || []).map((block) => {
               const text = block.children?.map((child) => child.text || '').join('') || ''
