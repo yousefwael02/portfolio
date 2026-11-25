@@ -1,8 +1,9 @@
 import {ArrowUpRight, ExternalLink, Github, Instagram, Linkedin} from 'lucide-react'
-import {Link, NavLink, Outlet} from 'react-router-dom'
+import {Link, NavLink, Outlet, useLocation} from 'react-router-dom'
 import {useEffect, useRef} from 'react'
 import {usePortfolio} from '../context/usePortfolio'
 import {ContentNotice} from './ContentNotice'
+import {MotionController} from './MotionController'
 
 const navigation = [
   {label: 'Work', to: '/projects'},
@@ -90,9 +91,11 @@ export function SiteLayout() {
   const {content} = usePortfolio()
   const profile = content?.profile
   const settings = content?.settings
+  const {pathname} = useLocation()
 
   return (
     <div className="site-shell">
+      <MotionController />
       <a className="skip-link" href="#main-content">Skip to content</a>
       <header className="site-header">
         <div className="site-header__inner">
@@ -121,7 +124,7 @@ export function SiteLayout() {
             <h1 id="maintenance-title">Back shortly.</h1>
             <p className="page-intro__body">{settings.maintenanceMessage || 'Please check back soon.'}</p>
           </section>
-        ) : <Outlet />}
+        ) : <div className="page-transition" key={pathname}><Outlet /></div>}
       </main>
       <footer className="site-footer">
         <div className="site-footer__inner">

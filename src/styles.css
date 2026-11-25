@@ -367,3 +367,74 @@ h1, h2, h3, p { margin-top: 0; }
   .contact-intro { grid-template-columns: 1fr; gap: 40px; padding-block: 55px 78px; }
   .contact-form__row { grid-template-columns: 1fr; }
 }
+/* ---------------------------------------------------------------------------
+   Motion
+   Every animation here ends in the element's normal state, so the existing
+   prefers-reduced-motion rule (which shortens all animations and transitions)
+   leaves the page fully visible. Scroll reveals only hide content under
+   html.motion-ready, set by MotionController when motion is allowed.
+--------------------------------------------------------------------------- */
+:root { --ease-out: cubic-bezier(.16, 1, .3, 1); }
+
+/* Header settles in once on first load; each route fades in when it changes. */
+.site-header { animation: header-in 700ms var(--ease-out) both; }
+.page-transition { animation: page-enter 480ms ease both; }
+
+/* Hero and page headings rise in line by line. */
+.hero__copy > *, .page-heading > .eyebrow, .page-heading > h1, .page-heading__row > *, .contact-copy > *, .project-detail__header > *, .back-link {
+  animation: rise-in 950ms var(--ease-out) both;
+}
+.hero__copy > :nth-child(2), .page-heading > :nth-child(2), .page-heading__row > :nth-child(1), .contact-copy > :nth-child(2), .project-detail__header > :nth-child(2) { animation-delay: 90ms; }
+.hero__copy > :nth-child(3), .page-heading__row > :nth-child(2), .contact-copy > :nth-child(3), .project-detail__header > :nth-child(3) { animation-delay: 180ms; }
+.hero__copy > :nth-child(4), .contact-copy > :nth-child(4), .project-detail__header > :nth-child(4) { animation-delay: 270ms; }
+.contact-copy > :nth-child(5) { animation-delay: 360ms; }
+
+/* Orbit: fades and scales in, the outer ring carries a glowing satellite, the core breathes. */
+.hero__aside { animation: orbit-in 1300ms var(--ease-out) 150ms both; }
+.orbit--outer { animation: orbit 60s linear infinite reverse; }
+.orbit--outer::after { position: absolute; top: 50%; left: -4px; width: 8px; height: 8px; border-radius: 50%; background: var(--color-accent); box-shadow: 0 0 16px 2px rgb(142 224 196 / 55%); content: ""; }
+.orbit-core { animation: core-glow 4.5s ease-in-out infinite alternate; }
+.hero__index-line { transform-origin: left; animation: line-grow 1100ms var(--ease-out) 600ms both; }
+.availability-dot { position: relative; }
+.availability-dot::after { position: absolute; inset: 0; border-radius: 50%; background: var(--color-accent); content: ""; animation: ping 2.4s cubic-bezier(0, 0, .2, 1) infinite; }
+
+/* Scroll reveals, staggered across siblings via --reveal-index. */
+.motion-ready [data-reveal] { opacity: 0; transform: translateY(28px); transition: opacity 800ms var(--ease-out), transform 1000ms var(--ease-out); transition-delay: calc(var(--reveal-index, 0) * 90ms); }
+.motion-ready [data-reveal].is-revealed { opacity: 1; transform: none; }
+
+/* Project cards: slow image zoom, a light sheen, and the title warming to the accent. */
+.project-card__media > img, .project-card__media > .project-art { transition: transform 1000ms var(--ease-out); }
+.project-card__link:hover .project-card__media > img, .project-card__link:hover .project-card__media > .project-art { transform: scale(1.045); }
+.project-card__media::after { position: absolute; inset: 0; z-index: 1; background: linear-gradient(115deg, transparent 35%, rgb(255 255 255 / 10%) 50%, transparent 65%); content: ""; pointer-events: none; transform: translateX(-110%); transition: transform 1100ms var(--ease-out); }
+.project-card__link:hover .project-card__media::after { transform: translateX(110%); }
+.project-card__heading h2 { transition: color 300ms ease; }
+.project-card__link:hover .project-card__heading h2 { color: var(--color-accent); }
+.project-card__link:focus-visible .project-card__media > img { transform: scale(1.045); }
+
+/* Buttons and links: arrows nudge toward where they lead; buttons lift and press. */
+.button { transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease, transform 220ms var(--ease-out), box-shadow 300ms ease; }
+.button:hover { transform: translateY(-2px); }
+.button:active { transform: translateY(0) scale(.98); }
+.button--primary:hover { box-shadow: 0 14px 34px -14px rgb(142 224 196 / 65%); }
+.button svg, .text-link svg, .header-cta svg, .footer-email svg, .service-row__link svg, .contact-email svg:last-child { transition: transform 260ms var(--ease-out); }
+.button:hover svg, .text-link:hover svg, .header-cta:hover svg, .footer-email:hover svg, .service-row__link:hover svg, .contact-email:hover svg:last-child { transform: translate(3px, -3px); }
+.back-link svg { transition: transform 260ms var(--ease-out); }
+.back-link:hover svg { transform: translateX(-4px); }
+.service-row__link { transition: border-color 180ms ease, background-color 220ms ease, color 220ms ease; }
+.service-row__link:hover { color: var(--color-ink); background: var(--color-accent); }
+.social-links a { transition: border-color 180ms ease, color 180ms ease, transform 260ms var(--ease-out); }
+.social-links a:hover { transform: translateY(-3px); }
+
+/* Capability rows: the text drifts slightly and the arrow lights up. */
+.capability-row__text, .capability-row__arrow, .capability-row__icon { transition: transform 400ms var(--ease-out), color 250ms ease; }
+.capability-row:hover .capability-row__text { transform: translateX(6px); }
+.capability-row:hover .capability-row__icon, .capability-row:hover .capability-row__arrow { color: var(--color-accent); }
+.capability-row:hover .capability-row__arrow { transform: translate(3px, -3px); }
+
+@keyframes header-in { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: none; } }
+@keyframes page-enter { from { opacity: 0; } to { opacity: 1; } }
+@keyframes rise-in { from { opacity: 0; transform: translateY(26px); filter: blur(6px); } to { opacity: 1; transform: none; filter: blur(0); } }
+@keyframes orbit-in { from { opacity: 0; transform: scale(.9) rotate(-8deg); } to { opacity: 1; transform: none; } }
+@keyframes core-glow { from { box-shadow: 0 0 60px rgb(84 198 162 / 8%); } to { box-shadow: 0 0 110px rgb(84 198 162 / 22%); } }
+@keyframes line-grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes ping { 0% { opacity: .7; transform: scale(1); } 80%, 100% { opacity: 0; transform: scale(3.2); } }
