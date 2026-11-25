@@ -3,6 +3,7 @@ import {Link, useParams} from 'react-router-dom'
 import {PageLoading} from '../components/ContentStates'
 import {SEO} from '../components/SEO'
 import {usePortfolio} from '../context/usePortfolio'
+import {trackEvent} from '../lib/analytics'
 import type {Project} from '../lib/portfolio'
 import {getSanityImageUrl} from '../lib/sanity'
 import {NotFoundPage} from './NotFoundPage'
@@ -47,6 +48,12 @@ export function ProjectDetailPage() {
         <div className={`project-detail__media project-card__media--${project.slug}`}>
           {image ? <img src={image} alt={project.coverImage?.alt || `${project.title} project`} /> : <div className="project-art project-art--large" aria-hidden="true"><span className="project-art__number">{project.startDate.slice(0, 4)}</span><span className="project-art__name">{project.title}</span><span className="project-art__stack">{project.technologies.map((technology) => technology.name).join(' / ')}</span><span className="project-art__orb" /></div>}
         </div>
+        {!!project.galleryImages?.length && <section className="project-gallery" aria-label={`${project.title} gallery`}>
+          {project.galleryImages.map((galleryImage, index) => {
+            const galleryImageUrl = getSanityImageUrl(galleryImage, 1200)
+            return galleryImageUrl ? <img key={galleryImage.assetRef || galleryImage.url || index} src={galleryImageUrl} alt={galleryImage.alt || `${project.title} screenshot ${index + 1}`} loading="lazy" decoding="async" /> : null
+          })}
+        </section>}
         <div className="project-detail__grid">
           <section className="project-detail__copy"><p className="eyebrow">The challenge</p><h2>The problem</h2><p>{project.problem}</p></section>
           <section className="project-detail__copy"><p className="eyebrow">The approach</p><h2>The solution</h2><p>{project.solution}</p></section>
@@ -54,8 +61,8 @@ export function ProjectDetailPage() {
           <aside className="project-detail__meta">
             <div><h2>Technologies</h2><ul className="technology-list">{project.technologies.map((technology) => <li key={technology._id}>{technology.name}</li>)}</ul></div>
             <div className="project-detail__links">
-              {project.liveUrl && <a href={project.liveUrl} target="_blank" rel="noreferrer">Visit project <ExternalLink aria-hidden="true" size={15} /></a>}
-              {project.repositoryUrl && <a href={project.repositoryUrl} target="_blank" rel="noreferrer">View repository <ExternalLink aria-hidden="true" size={15} /></a>}
+              {project.liveUrl && <a href={project.liveUrl} target="_blank" rel="noreferrer" onClick={() => trackEvent({name: 'Project Link Click', properties: {project: project.slug, link: 'live'}})}>Visit project <ExternalLink aria-hidden="true" size={15} /></a>}
+              {project.repositoryUrl && <a href={project.repositoryUrl} target="_blank" rel="noreferrer" onClick={() => trackEvent({name: 'Project Link Click', properties: {project: project.slug, link: 'repository'}})}>View repository <ExternalLink aria-hidden="true" size={15} /></a>}
             </div>
           </aside>
         </div>

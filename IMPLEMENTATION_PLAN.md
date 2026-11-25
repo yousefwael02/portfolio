@@ -6,6 +6,18 @@ Build a polished, production-ready personal portfolio that presents professional
 
 The site will be public-facing, fast, responsive, accessible, and CMS-driven so its content can be updated without code changes or redeploys.
 
+## Current Status
+
+- Phase 1: Discovery and content planning — complete.
+- Phase 2: Information architecture and design — complete.
+- Phase 3: CMS implementation and schema setup — complete.
+- Phase 4: Frontend foundation and shared layout — substantially complete.
+- Phase 5: Public pages and content integration — implementation complete; content assets pending.
+- Phase 6: Contact form, analytics, and integrations — implementation complete; production verification of contact delivery pending.
+- Phases 7–8: Quality assurance, performance, deployment, and launch — not started.
+
+The repository currently has a working React frontend, Sanity Studio schemas and seed content, routed public pages, CMS-backed published-content fetching, project filtering, SEO metadata, structured data, gallery rendering, CMS-managed skill groups, and loading, empty, and not-found states. ChestVision is now seeded as a public project, giving the launch content three visible projects. Remaining content work is limited to uploading images and the resume, then completing the final content review.
+
 ---
 
 ## 2. Recommended Technical Direction
@@ -216,6 +228,10 @@ Connect the CMS to real pages and render the portfolio content.
 - Missing optional fields do not cause broken UI.
 - Metadata and content URLs are valid and stable.
 
+### Current status
+
+Implementation complete. Home, About, Projects, project detail, Services, and Contact pages are connected to published Sanity content. Project filtering, page metadata, structured data, crawler files, responsive navigation, missing-content states, optional project galleries, and CMS-managed skill groups are implemented. The contact page currently provides email and social links; the form and delivery workflow belong to Phase 6. Image and resume uploads remain content tasks.
+
 ---
 
 ## Phase 6: Contact Form, Analytics, and Integrations
@@ -246,6 +262,10 @@ Enable outbound communication and production tracking while keeping privacy and 
 - Valid inquiries are delivered and invalid submissions are handled gracefully.
 - Analytics measures traffic without collecting private message content.
 - CMS updates reflect in the site without code edits.
+
+### Current status
+
+In progress. The contact form UI and Vercel `/api/contact` endpoint are implemented with server-side Resend delivery, field validation, a honeypot, and a distributed Upstash rate limit. Production submissions require the Resend sender/recipient and Upstash Redis environment variables. Vercel Web Analytics is mounted app-wide with query strings and fragments stripped, and tracks `Project Link Click`, `Resume Download`, and `Contact Form Submit` (result only) as custom events; no message content is sent. Analytics must be enabled in the Vercel dashboard, and custom events need a Pro plan. CMS updates reach the site without a redeploy: pages read published Sanity content at runtime, open tabs refetch after five minutes away, and `sitemap.xml`/`robots.txt` are served by Vercel functions with a ten-minute CDN cache instead of being generated at build time. Remaining: verify contact delivery with production Resend and Upstash credentials.
 
 ---
 
@@ -360,19 +380,19 @@ A realistic timeline for a solo build is 5 to 8 weeks depending on content readi
 
 ### Content
 - [ ] Professional bio and title finalized
-- [ ] 3 or more launch-ready projects prepared
+- [x] 3 or more launch-ready projects prepared
 - [ ] Experience and education data captured
 - [ ] Services text approved
 - [ ] Resume file available
 - [ ] Social links and contact details confirmed
 
 ### Technical
-- [ ] React.js app initialized
-- [ ] Tailwind and TypeScript configured
-- [ ] Sanity connected and content models created
-- [ ] Project listing and detail routing working
+- [x] React.js app initialized
+- [x] Tailwind and TypeScript configured
+- [x] Sanity connected and content models created
+- [x] Project listing and detail routing working
 - [ ] Contact form validated and sending
-- [ ] Analytics configured
+- [x] Analytics configured
 - [ ] Deployment pipeline complete
 
 ### Quality
@@ -421,14 +441,10 @@ The project is complete when all of the following are true:
 
 ## 10. Immediate Next Step
 
-Start with Phase 1 and produce a single launch-content sheet that includes:
+Complete the remaining Phase 5 content tasks:
 
-1. About/bio
-2. Experience and education entries
-3. Skills and technologies
-4. Services
-5. Three to five polished projects
-6. Social links and resume file
-7. Contact details
+1. Upload and verify project cover/gallery images and profile media through Sanity.
+2. Upload and verify the resume through Sanity.
+3. Review and approve the final public content set.
 
-This content package should be complete before the design and build squads begin in earnest, because it drives the site structure and CMS schema.
+Import the updated seed so ChestVision is public in the Sanity dataset, then verify contact delivery with production Resend and Upstash credentials once deployed.

@@ -3,11 +3,20 @@ import {Link} from 'react-router-dom'
 import {PageLoading} from '../components/ContentStates'
 import {SEO} from '../components/SEO'
 import {usePortfolio} from '../context/usePortfolio'
+import {trackEvent} from '../lib/analytics'
 import {getSanityImageUrl} from '../lib/sanity'
+import type {Skill} from '../lib/portfolio'
 
 function formatDate(value?: string) {
   if (!value) return 'Present'
   return new Date(`${value}T00:00:00`).toLocaleDateString('en', {month: 'short', year: 'numeric'})
+}
+
+function groupSkills(skills: Skill[]) {
+  return skills.reduce<Record<string, Skill[]>>((groups, skill) => {
+    groups[skill.category] = [...(groups[skill.category] || []), skill]
+    return groups
+  }, {})
 }
 
 export function AboutPage() {
@@ -29,7 +38,7 @@ export function AboutPage() {
               if (!text) return null
               return block.style === 'h2' ? <h2 key={block._key}>{text}</h2> : <p key={block._key}>{text}</p>
             })}
-            {profile?.resumeFileUrl && <a className="button button--outline resume-link" href={profile.resumeFileUrl} target="_blank" rel="noreferrer"><ArrowDownToLine aria-hidden="true" size={17} /> Download resume</a>}
+            {profile?.resumeFileUrl && <a className="button button--outline resume-link" href={profile.resumeFileUrl} target="_blank" rel="noreferrer" onClick={() => trackEvent({name: 'Resume Download'})}><ArrowDownToLine aria-hidden="true" size={17} /> Download resume</a>}
           </div>
         </div>
         <section className="timeline-section" aria-labelledby="experience-heading">
@@ -50,7 +59,7 @@ export function AboutPage() {
         </section>
         <section className="strengths-section" aria-labelledby="strengths-heading">
           <div className="section-heading"><div><p className="eyebrow">Areas of focus</p><h2 id="strengths-heading">Skills & strengths</h2></div></div>
-          <div className="strengths-list">{(profile?.skillHighlights || []).map((skill) => <p key={skill}>{skill}</p>)}</div>
+          {content?.skills.length ? <div className="skill-groups">{Object.entries(groupSkills(content.skills)).map(([category, skills]) => <div className="skill-group" key={category}><h3>{category}</h3><div className="strengths-list">{skills.map((skill) => <p key={skill._id}><strong>{skill.name}</strong>{skill.summary ? ` — ${skill.summary}` : ''}</p>)}</div></div>)}</div> : <div className="strengths-list">{(profile?.skillHighlights || []).map((skill) => <p key={skill}>{skill}</p>)}</div>}
         </section>
         <Link className="text-link" to="/contact">Get in touch <ArrowUpRight aria-hidden="true" size={16} /></Link>
       </section>
